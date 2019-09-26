@@ -7,6 +7,7 @@ This is a javascript implementation of the classic game asteroid. Initial commit
 
 ## Planned Future Work
   - Update the respawn so that an asteroid in the center of the screen does not triple kill and cause game over.
+  - Ensure that asteroids cannot spawn in the center of the screen and cause immediate game over
   - Ship destroyed animations
   - Selectors on the screen to change some of the game mechanics:
     - Number of asteroids
