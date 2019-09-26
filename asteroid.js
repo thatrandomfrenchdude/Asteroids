@@ -29,17 +29,21 @@ function SetupCanvas(){
     }
 
     //trick to work with multiple keyboard inputs at once
-    document.body.addEventListener("keydown", function(e){
-        keys[e.keyCode] = true;
-    });
-    document.body.addEventListener("keyup", function(e){
-        keys[e.keyCode] = false;
-        // should only allow the ship to fire when the space bar is released
-        if (e.keyCode === 32 && ship.visible) {
-            bullets.push(new Bullet(ship.angle));
-        }
-    });
+    document.body.addEventListener("keydown", keyDown);
+    document.body.addEventListener("keyup", keyUp);
     Render();
+}
+
+function keyDown(e) {
+    keys[e.keyCode] = true;
+}
+
+function keyUp(e) {
+    keys[e.keyCode] = false;
+    // should only allow the ship to fire when the space bar is released
+    if (e.keyCode === 32) {
+        bullets.push(new Bullet(ship.angle));
+    }
 }
 
 class Ship {
@@ -228,6 +232,8 @@ function Render(){
 
     //check if lives remain
     if (lives <= 0){
+        document.body.removeEventListener("keydown", keyDown);
+        document.body.removeEventListener("keyup", keyUp);
         ship.visible = false;
         ctx.fillStyle = 'white';
         ctx.font = '50px Arial';
